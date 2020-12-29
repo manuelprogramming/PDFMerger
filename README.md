@@ -7,3 +7,7 @@ Its a Program written in Python 3.7+, Libraries used: -PyQt5 -PyPDF2. The IDE us
 
 ### Authors
 Emanuel Pegler - Initial work -
+
+### License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
