@@ -20,7 +20,8 @@ class Merger(Tool):
     def saveFileDialog(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        fileName, _ = QFileDialog.getSaveFileName(self.pdfmerger, "Merged File", "*.pdf", "All Files (*);;PDF Files (*.pdf)", options=options)
+        fileName, _ = QFileDialog.getSaveFileName(self.pdfmerger, "Merged File", "*.pdf",
+                                                  "All Files (*);;PDF Files (*.pdf)", options=options)
         if fileName:
             with open(fileName, "wb") as out:
                 self.pdf_writer.write(out)
