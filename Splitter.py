@@ -1,9 +1,7 @@
-from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtWidgets import QFileDialog,QApplication
-from PDFMergerUI import Ui_PDFMergerUI
+from PyQt5.QtWidgets import QFileDialog
 from PyPDF2 import PdfFileReader, PdfFileWriter
 from Tool import Tool
-import os
+
 
 
 class Splitter(Tool):
