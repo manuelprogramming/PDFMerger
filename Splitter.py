@@ -1,6 +1,9 @@
-from PyQt5.QtWidgets import QFileDialog
+from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QFileDialog,QApplication
+from PDFMergerUI import Ui_PDFMergerUI
 from PyPDF2 import PdfFileReader, PdfFileWriter
 from Tool import Tool
+import os
 
 
 class Splitter(Tool):
@@ -16,6 +19,7 @@ class Splitter(Tool):
                 self.createSplittedPDFs(pdf_reader, fileName)
         self.displaySuccesfullSplitedMessage()
 
+
     def createSplittedPDFs(self, pdf_reader, fileName):
         for i in range(pdf_reader.numPages):
             pdf_writer = PdfFileWriter()
@@ -24,11 +28,11 @@ class Splitter(Tool):
             with open(output_line, "wb") as outputStream:
                 pdf_writer.write(outputStream)
 
+
     def splitSaveFileDialog(self):
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        fileName, _ = QFileDialog.getSaveFileName(self.pdfmerger, "Save Splitted Files To?", "*.pdf",
-                                                  "All Files (*);;PDF Files (*.pdf)", options=options)
+        fileName, _ = QFileDialog.getSaveFileName(self.pdfmerger, "Save Splitted Files To?", "*.pdf", "All Files (*);;PDF Files (*.pdf)", options=options)
         return fileName
 
     def createSplitFilename(self, fileName, i):
