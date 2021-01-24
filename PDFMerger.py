@@ -19,6 +19,7 @@ class PDFMerger(QtWidgets.QMainWindow, Ui_PDFMergerUI):
     def setupProgramm(self):
         self.connectButtons()
         self.setFixedWindowSize()
+        self.setStyleSheet(open("QDarkOrangeTheme.css").read())
         self.process_label.setText("Operating in Merge Mode")
         self.app.setStyle("Fusion")
 

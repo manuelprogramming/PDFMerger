@@ -35,7 +35,8 @@ class Splitter(Tool):
         fileName, _ = QFileDialog.getSaveFileName(self.pdfmerger, "Save Splitted Files To?", "*.pdf", "All Files (*);;PDF Files (*.pdf)", options=options)
         return fileName
 
-    def createSplitFilename(self, fileName, i):
+    @staticmethod
+    def createSplitFilename(fileName, i):
         index = fileName.find('.pdf')
         output_line = fileName[:index] + str(i) + fileName[index:]
         return output_line
