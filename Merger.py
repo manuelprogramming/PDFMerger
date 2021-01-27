@@ -17,15 +17,12 @@ class Merger(Tool):
         self.displaySucessfullCreationMessage()
 
 
-    def saveFileDialog(self):
-        options = QFileDialog.Options()
-        options |= QFileDialog.DontUseNativeDialog
-        fileName, _ = QFileDialog.getSaveFileName(self.pdfmerger, "Merged File", "*.pdf",
-                                                  "All Files (*);;PDF Files (*.pdf)", options=options)
-        if fileName:
-            with open(fileName, "wb") as out:
+    def saveFile(self):
+        file_name = self.saveFileDialog()
+        if file_name:
+            with open(file_name, "wb") as out:
                 self.pdf_writer.write(out)
-                self.pdfmerger.process_label.setText(f"PDF-File successfully saved as {fileName}")
+                self.pdfmerger.process_label.setText(f"PDF-File successfully saved as \n{file_name}")
 
 
     def displaySucessfullCreationMessage(self):
