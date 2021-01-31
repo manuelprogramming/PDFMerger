@@ -6,26 +6,37 @@ from Tool import Tool
 import os
 from HelpingFunction import *
 
+
 class Splitter(Tool):
     def __init__(self, pdfmerger):
         super().__init__(pdfmerger)
         self.pdfmerger = pdfmerger
+        self.file_handler = pdfmerger.file_handler
 
+    @tryThis
     def splitPDF(self):
         fileName = self.splitSaveFileDialog()
         if fileName:
-            for file in self.pdfmerger.current_files:
-                pdf_reader = PdfFileReader(file)
-                self.createSplittedPDFs(pdf_reader, fileName)
+            for file in self.file_handler.current_files:
+                self.createSplittedPDFs(file, fileName)
         self.displaySuccesfullSplitedMessage()
 
-    def createSplittedPDFs(self, pdf_reader, fileName):
+    def createSplittedPDFs(self, file, fileName):
+        pdf_reader = PdfFileReader(file)
         for i in range(pdf_reader.numPages):
-            pdf_writer = PdfFileWriter()
-            pdf_writer.addPage(pdf_reader.getPage(i))
-            output_line = createSplitFilename(fileName, i, ".pdf")
-            with open(output_line, "wb") as outputStream:
-                pdf_writer.write(outputStream)
+            pdf_writer = self._createWriterAndAddPage(pdf_reader, i)
+            fileName = createSplitFilename(fileName, i, ".pdf")
+            self._saveToFile(fileName, pdf_writer)
+
+    @staticmethod
+    def _createWriterAndAddPage(pdf_reader, i):
+        pdf_writer = PdfFileWriter()
+        return pdf_writer.addPage(pdf_reader.getPage(i))
+
+    @staticmethod
+    def _saveToFile(fileName, pdf_writer):
+        with open(fileName, "wb") as outputStream:
+            pdf_writer.write(outputStream)
 
     def splitSaveFileDialog(self):
         options = QFileDialog.Options()
@@ -35,5 +46,5 @@ class Splitter(Tool):
         return fileName
 
     def displaySuccesfullSplitedMessage(self):
-        if self.pdfmerger.current_files:
+        if self.file_handler.current_files:
             self.pdfmerger.process_label.setText("PDF-File successfully splited and saved to the selected Folder")

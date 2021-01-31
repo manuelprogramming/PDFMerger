@@ -32,7 +32,7 @@ class EventHandler:
         self.pdfmerger.delete_selected_file_button.clicked.connect(self.clearSelectedFile)
 
     def endProgramm(self):
-        self.pdfmerger.exit()
+        self.pdfmerger.app.exit()
 
     def clearFiles(self):
         self.pdfmerger.clearFiles()
