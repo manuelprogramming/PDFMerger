@@ -1,5 +1,5 @@
 # PDFMerger
-This is a simple PyQt5 based PDF Merger. I wanted to create a small Desktop App for merging and splitting PDF since i didn't want to upload my personal data to some shady website.
+This is a simple PyQt5 based PDF Merger. I wanted to create a small Desktop App for merging and splitting PDF. This project ist just a learning project and will not be maintained any further
 
 ## Getting Started
 
